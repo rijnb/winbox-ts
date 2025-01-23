@@ -1,0 +1,4 @@
+# Relevant ignores.
+node_modules/
+dist/
+coverage/
