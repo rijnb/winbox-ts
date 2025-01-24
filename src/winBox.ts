@@ -38,7 +38,7 @@ let prefix_exit: string
 let root_w: number, root_h: number
 let window_clicked: boolean
 
-export interface WinBoxParams {
+export interface WinBoxParams = {
   id?: string
   index?: number
   root?: HTMLElement
@@ -85,7 +85,7 @@ export interface WinBoxParams {
   onload?: () => void
 }
 
-class WinBox {
+export class WinBox {
   dom: HTMLElement
   id: string = ""
   index: number = 0
@@ -132,18 +132,18 @@ class WinBox {
     let min, max, hidden, modal
     let background, border, header, classname
     let oncreate,
-        onclose,
-        onfocus,
-        onblur,
-        onmove,
-        onresize,
-        onfullscreen,
-        onmaximize,
-        onminimize,
-        onrestore,
-        onhide,
-        onshow,
-        onload
+      onclose,
+      onfocus,
+      onblur,
+      onmove,
+      onresize,
+      onfullscreen,
+      onmaximize,
+      onminimize,
+      onrestore,
+      onhide,
+      onshow,
+      onload
 
     title = params.title
     id = params.id
@@ -200,9 +200,9 @@ class WinBox {
     this.dom = template(tpl)
     this.dom.id = this.id = id || "winbox-" + ++id_counter
     this.dom.className =
-        "winbox" +
-        (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") +
-        (modal ? " modal" : "")
+      "winbox" +
+      (classname ? " " + (typeof classname === "string" ? classname : classname.join(" ")) : "") +
+      (modal ? " modal" : "")
     ;(this.dom as any).winbox = this
     this.body = getByClass(this.dom, "wb-body") as HTMLElement
     this.header = header || 35
@@ -518,8 +518,8 @@ class WinBox {
 
     if (!this.max) {
       this.addClass("max")
-          .resize(root_w - this.left - this.right, root_h - this.top - this.bottom /* - 1 */, true)
-          .move(this.left, this.top, true)
+        .resize(root_w - this.left - this.right, root_h - this.top - this.bottom /* - 1 */, true)
+        .move(this.left, this.top, true)
 
       this.max = true
       this.onmaximize && this.onmaximize()
@@ -615,7 +615,7 @@ class WinBox {
     if (classname) if (classname) node.className = classname
     if (image) setStyle(node, "background-image", "url(" + image + ")")
     if (click)
-      node.onclick = function (event) {
+      node.onclick = function(event) {
         click.call(this, event, self)
       }
 
@@ -678,24 +678,24 @@ function setup() {
   (prefix_request = "" as keyof HTMLElement)
 
   prefix_exit =
-      prefix_request &&
-      prefix_request.replace("request", "exit").replace("mozRequest", "mozCancel").replace("Request", "Exit")
+    prefix_request &&
+    prefix_request.replace("request", "exit").replace("mozRequest", "mozCancel").replace("Request", "Exit")
 
-  addListener(window, "resize", function () {
+  addListener(window, "resize", function() {
     init()
     update_min_stack()
   })
 
   addListener(
-      body,
-      "mousedown",
-      function (event) {
-        window_clicked = false
-      },
-      true
+    body,
+    "mousedown",
+    function(event) {
+      window_clicked = false
+    },
+    true
   )
 
-  addListener(body, "mousedown", function (event) {
+  addListener(body, "mousedown", function(event) {
     if (!window_clicked) {
       const stack_length = stack_win.length
       if (stack_length) {
@@ -724,18 +724,18 @@ function register(self: WinBox) {
   addWindowListener(self, "se")
   addWindowListener(self, "sw")
 
-  addListener(getByClass(self.dom, "wb-min")!, "click", function (event) {
+  addListener(getByClass(self.dom, "wb-min")!, "click", function(event) {
     preventEvent(event)
     self.min ? self.restore().focus() : self.minimize()
   })
 
-  addListener(getByClass(self.dom, "wb-max")!, "click", function (event) {
+  addListener(getByClass(self.dom, "wb-max")!, "click", function(event) {
     preventEvent(event)
     self.max ? self.restore().focus() : self.maximize().focus()
   })
 
   if (prefix_request) {
-    addListener(getByClass(self.dom, "wb-full")!, "click", function (event) {
+    addListener(getByClass(self.dom, "wb-full")!, "click", function(event) {
       preventEvent(event)
       self.fullscreen().focus()
     })
@@ -743,27 +743,27 @@ function register(self: WinBox) {
     self.addClass("no-full")
   }
 
-  addListener(getByClass(self.dom, "wb-close")!, "click", function (event) {
+  addListener(getByClass(self.dom, "wb-close")!, "click", function(event) {
     preventEvent(event)
     self.close()
   })
 
   addListener(
-      self.dom,
-      "mousedown",
-      function (event) {
-        window_clicked = true
-      },
-      true
+    self.dom,
+    "mousedown",
+    function(event) {
+      window_clicked = true
+    },
+    true
   )
 
   addListener(
-      self.body,
-      "mousedown",
-      function (event) {
-        self.focus()
-      },
-      true
+    self.body,
+    "mousedown",
+    function(event) {
+      self.focus()
+    },
+    true
   )
 }
 
@@ -780,8 +780,8 @@ function remove_min_stack(self: WinBox) {
 
 function update_min_stack() {
   const length = stack_min.length
-  const splitscreen_index: { [key: string]: number } = {}
-  const splitscreen_length: { [key: string]: number } = {}
+  const splitscreen_index: {[key: string]: number} = {}
+  const splitscreen_length: {[key: string]: number} = {}
 
   for (let i = 0, self, key; i < length; i++) {
     self = stack_min[i]
@@ -800,8 +800,8 @@ function update_min_stack() {
     key = self.left + ":" + self.top
     width = Math.min((root_w - self.left - self.right) / splitscreen_length[key], 250)
     self
-        .resize((width + 1) | 0, self.header, true)
-        .move((self.left + splitscreen_index[key] * width) | 0, root_h - self.bottom - self.header, true)
+      .resize((width + 1) | 0, self.header, true)
+      .move((self.left + splitscreen_index[key] * width) | 0, root_h - self.bottom - self.header, true)
     splitscreen_index[key]++
   }
 }
@@ -940,15 +940,15 @@ function addWindowListener(self: WinBox, dir: string) {
     if (move_x) {
       if (self.max) {
         self.x =
-            (pageX < root_w / 3
-                ? self.left
-                : pageX > (root_w / 3) * 2
-                    ? root_w - self.width - self.right
-                    : root_w / 2 - self.width / 2) + offsetX
+          (pageX < root_w / 3
+            ? self.left
+            : pageX > (root_w / 3) * 2
+              ? root_w - self.width - self.right
+              : root_w / 2 - self.width / 2) + offsetX
       }
       self.x = Math.max(
-          Math.min(self.x, self.overflow ? root_w - 30 : root_w - self.width - self.right),
-          self.overflow ? 30 - self.width : self.left
+        Math.min(self.x, self.overflow ? root_w - 30 : root_w - self.width - self.right),
+        self.overflow ? 30 - self.width : self.left
       )
       move_x = self.x !== old_x
     }
@@ -958,8 +958,8 @@ function addWindowListener(self: WinBox, dir: string) {
         self.y = self.top + offsetY
       }
       self.y = Math.max(
-          Math.min(self.y, self.overflow ? root_h - self.header : root_h - self.height - self.bottom),
-          self.top
+        Math.min(self.y, self.overflow ? root_h - self.header : root_h - self.height - self.bottom),
+        self.top
       )
       move_y = self.y !== old_y
     }
@@ -1026,9 +1026,9 @@ function cancel_fullscreen(): boolean {
 
 function has_fullscreen(): boolean {
   return (
-      !!document.fullscreen || !!document.fullscreenElement ||
-      !!(document as any).webkitFullscreenElement ||
-      !!(document as any).mozFullScreenElement
+    !!document.fullscreen || !!document.fullscreenElement ||
+    !!(document as any).webkitFullscreenElement ||
+    !!(document as any).mozFullScreenElement
   )
 }
 

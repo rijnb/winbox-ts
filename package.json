@@ -1,6 +1,6 @@
 {
   "name": "winbox-ts",
-  "version": "0.9.1",
+  "version": "0.9.7",
   "description": "Modern HTML5 window manager for the web (TypeScript version).",
   "author": "Rijn Buve",
   "copyright": "Rijn Buve",
