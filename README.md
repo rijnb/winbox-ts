@@ -1,7 +1,7 @@
 ```
 Note: This TyepScript version of WinBox was created by Rijn Buve, 2025. 
 It is based on version 0.2.82 of the JavaScript version of WinBox created
-by Thomas Wilkerling.
+by Thomas Wilkerling (many thanks for his work).
 ``` 
 
 <h1>
