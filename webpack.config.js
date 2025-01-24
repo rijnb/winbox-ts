@@ -26,8 +26,11 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"]
   },
   output: {
-    filename: "bundle.js", // Changed from index.js to bundle.js.
-    path: path.resolve(__dirname, "dist")
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    libraryTarget: "umd",
+    library: 'WinBox-TypeScript',
+    umdNamedDefine: true
   },
   devServer: {
     open: false,

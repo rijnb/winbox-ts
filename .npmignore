@@ -1,0 +1,10 @@
+coverage/
+node_modules/
+public/
+src/
+.git/
+.vscode/
+.DS_Store
+.npmignore
+.gitignore
+*.log

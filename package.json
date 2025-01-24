@@ -2,16 +2,21 @@
   "name": "winbox-ts",
   "version": "0.9.0",
   "description": "Modern HTML5 window manager for the web (TypeScript version).",
+  "author": "Rijn Buve",
+  "copyright": "Rijn Buve",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/rijnb/winbox-ts",
-  "bugs": {
-    "url": "https://github.com/rijnb/winbox-ts/issues",
-    "email": "rijn@buve.nl"
-  },
-  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/rijnb/winbox-ts.git"
   },
+  "bugs": {
+    "url": "https://github.com/rijnb/winbox-ts/issues",
+    "email": "rijn@buve.nl"
+  },
+  "keywords": [],
+  "main": "dist/bundle.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=16.14.0",
     "npm": ">=8.1.0"
@@ -26,6 +31,11 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,html,md,yaml,yml}\""
   },
   "readme": "README.md",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "optionalDependencies": {
     "fsevents": "^2.3.3"
   },
@@ -51,9 +61,5 @@
   },
   "dependencies": {
     "clean-webpack-plugin": "^4.0.0"
-  },
-  "keywords": [],
-  "author": "Rijn Buve",
-  "copyright": "Rijn Buve",
-  "license": "Apache-2.0"
+  }
 }
