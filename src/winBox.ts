@@ -38,7 +38,7 @@ let prefix_exit: string
 let root_w: number, root_h: number
 let window_clicked: boolean
 
-export interface WinBoxParams = {
+export type WinBoxParams = {
   id?: string
   index?: number
   root?: HTMLElement
