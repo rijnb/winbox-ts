@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin")
 const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 
 module.exports = {
-  entry: "./src/index.ts",
+  entry: "./src/demo.ts",
   devtool: "source-map",
   mode: "development",
   module: {
