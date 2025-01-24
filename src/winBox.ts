@@ -336,14 +336,14 @@ class WinBox {
     return stack_win
   }
 
-  mount(src: HTMLElement): WinBox {
+  mount(src: HTMLElement): this {
     this.unmount()
     this.body.textContent = ""
     this.body.appendChild(src)
     return this
   }
 
-  unmount(dest?: HTMLElement): WinBox {
+  unmount(dest?: HTMLElement): this {
     const node = this.body.firstChild
     if (node) {
       const root = dest || (node as any)._backstore
@@ -353,25 +353,25 @@ class WinBox {
     return this
   }
 
-  setTitle(title: string): WinBox {
+  setTitle(title: string): this {
     const node = getByClass(this.dom, "wb-title") as HTMLElement
     setText(node, (this.title = title))
     return this
   }
 
-  setIcon(src: string): WinBox {
+  setIcon(src: string): this {
     const img = getByClass(this.dom, "wb-icon") as HTMLElement
     setStyle(img, "background-image", "url(" + src + ")")
     setStyle(img, "display", "inline-block")
     return this
   }
 
-  setBackground(background: string): WinBox {
+  setBackground(background: string): this {
     setStyle(this.dom, "background", background)
     return this
   }
 
-  setUrl(url: string, onload?: () => void): WinBox {
+  setUrl(url: string, onload?: () => void): this {
     const node = this.body.firstChild as HTMLIFrameElement
     if (node && node.tagName.toLowerCase() === "iframe") {
       node.src = url
@@ -382,7 +382,7 @@ class WinBox {
     return this
   }
 
-  focus(state?: boolean): WinBox {
+  focus(state?: boolean): this {
     if (state === false) {
       return this.blur()
     }
@@ -411,7 +411,7 @@ class WinBox {
     return this
   }
 
-  blur(state?: boolean): WinBox {
+  blur(state?: boolean): this {
     if (state === false) {
       return this.focus()
     }
@@ -425,7 +425,7 @@ class WinBox {
     return this
   }
 
-  hide(state?: boolean): WinBox {
+  hide(state?: boolean): this {
     if (state === false) {
       return this.show()
     }
@@ -438,7 +438,7 @@ class WinBox {
     return this
   }
 
-  show(state?: boolean): WinBox {
+  show(state?: boolean): this {
     if (state === false) {
       return this.hide()
     }
@@ -451,7 +451,7 @@ class WinBox {
     return this
   }
 
-  minimize(state?: boolean): WinBox {
+  minimize(state?: boolean): this {
     if (state === false) {
       return this.restore()
     }
@@ -483,7 +483,7 @@ class WinBox {
     return this
   }
 
-  restore(): WinBox {
+  restore(): this {
     if (is_fullscreen) {
       cancel_fullscreen()
     }
@@ -546,7 +546,7 @@ class WinBox {
     this.focused && focus_next()
   }
 
-  fullscreen(state?: boolean): WinBox {
+  fullscreen(state?: boolean): this {
     if (this.min) {
       remove_min_stack(this)
       this.resize().move()
@@ -565,7 +565,7 @@ class WinBox {
     return this
   }
 
-  move(x?: number | string, y?: number | string, _skip_update?: boolean): WinBox {
+  move(x?: number | string, y?: number | string, _skip_update?: boolean): this {
     if (!x && x !== 0) {
       x = this.x
       y = this.y
@@ -580,7 +580,7 @@ class WinBox {
     return this
   }
 
-  resize(w?: number | string, h?: number | string, _skip_update?: boolean): WinBox {
+  resize(w?: number | string, h?: number | string, _skip_update?: boolean): this {
     if (!w && w !== 0) {
       w = this.width
       h = this.height
@@ -604,7 +604,7 @@ class WinBox {
     image?: string
     click?: (event: MouseEvent, self: WinBox) => void
     index?: number
-  }): WinBox {
+  }): this {
     const classname = control.class
     const image = control.image
     const click = control.click
@@ -631,12 +631,12 @@ class WinBox {
     return this
   }
 
-  addClass(classname: string): WinBox {
+  addClass(classname: string): this {
     addClass(this.dom, classname)
     return this
   }
 
-  removeClass(classname: string): WinBox {
+  removeClass(classname: string): this {
     removeClass(this.dom, classname)
     return this
   }
@@ -650,12 +650,6 @@ class WinBox {
   }
 }
 
-/**
- * @param {number|string} num
- * @param {number} base
- * @param {number=} center
- * @return number
- */
 function parse(num: number | string, base: number, center = 0): number {
   if (typeof num === "string") {
     if (num === "center") {
@@ -679,6 +673,7 @@ function setup() {
   body = document.body
 
   body[(prefix_request = "requestFullscreen")]
+  // !!
   // ||
   // body[prefix_request = "msRequestFullscreen"] ||
   // body[prefix_request = "webkitRequestFullscreen"] ||
@@ -694,14 +689,15 @@ function setup() {
     update_min_stack()
   })
 
-  addListener(
-      body,
-      "mousedown",
-      function (event) {
-        window_clicked = false
-      },
-      true
-  )
+  // !! TODO: Remove
+  // addListener(
+  //     body,
+  //     "mousedown",
+  //     function (event) {
+  //       window_clicked = false
+  //     },
+  //     true
+  // )
 
   addListener(body, "mousedown", function (event) {
     if (!window_clicked) {
@@ -716,14 +712,12 @@ function setup() {
         }
       }
     }
+    window_clicked = false
   })
 
   init()
 }
 
-/**
- * @param {WinBox} self
- */
 function register(self: WinBox) {
   addWindowListener(self, "drag")
   addWindowListener(self, "n")
@@ -846,8 +840,8 @@ function addWindowListener(self: WinBox, dir: string) {
     }
   }
 
-  function mousedown(event: MouseEvent | TouchEvent) {
-    preventEvent(event, true)
+  function mousedown(event: MouseEvent | TouchEvent|Touch) {
+    preventEvent(event as Event, true)
     self.focus()
 
     if (dir === "drag") {
@@ -874,6 +868,7 @@ function addWindowListener(self: WinBox, dir: string) {
       use_raf && loop()
 
       if (event instanceof TouchEvent && (touch = event.touches[0])) {
+        event = touch
         addListener(window, "touchmove", handler_mousemove as EventListener, eventOptionsPassive)
         addListener(window, "touchend", handler_mouseup as EventListener, eventOptionsPassive)
       } else if (event instanceof MouseEvent) {
@@ -881,19 +876,20 @@ function addWindowListener(self: WinBox, dir: string) {
         addListener(window, "mouseup", handler_mouseup as EventListener, eventOptionsPassive)
       }
 
-      x = touch?.pageX ?? 0
-      y = touch?.pageY ?? 0
+      x = !(event instanceof TouchEvent) ? event.pageX : 0
+      y = !(event instanceof TouchEvent) ?event.pageY : 0
     }
   }
 
-  function handler_mousemove(event: MouseEvent | TouchEvent) {
-    preventEvent(event)
+  function handler_mousemove(event: MouseEvent | TouchEvent | Touch) {
+    preventEvent(event as Event)
 
-    let touch
-    event instanceof TouchEvent && (touch = event.touches[0])
+    if (touch) {
+      event instanceof TouchEvent && (event = event.touches[0])
+    }
 
-    const pageX = touch?.pageX ?? 0
-    const pageY = touch?.pageY ?? 0
+    const pageX = !(event instanceof TouchEvent) ?event.pageX : 0
+    const pageY = !(event instanceof TouchEvent) ?event.pageY : 0
     const offsetX = pageX - x
     const offsetY = pageY - y
 
@@ -994,7 +990,7 @@ function addWindowListener(self: WinBox, dir: string) {
     removeClass(body, "wb-lock")
     use_raf && cancelAnimationFrame(raf_timer)
 
-    if (event instanceof TouchEvent) {
+    if (touch) {
       removeListener(window, "touchmove", handler_mousemove as EventListener, eventOptionsPassive)
       removeListener(window, "touchend", handler_mouseup as EventListener, eventOptionsPassive)
     } else if (event instanceof MouseEvent) {
@@ -1036,6 +1032,7 @@ function cancel_fullscreen(): boolean {
 function has_fullscreen(): boolean {
   return (
       !!document.fullscreen || !!document.fullscreenElement
+      // !!
       // ||
       // !!document.webkitFullscreenElement ||
       // !!document.mozFullScreenElement

@@ -1,39 +1,20 @@
-/**
- * @param node
- * @param event
- * @param fn
- * @param opt
- */
-
 export function addListener(
-  node: Window | Element,
-  event: string,
-  fn: EventListenerOrEventListenerObject,
-  opt?: AddEventListenerOptions | boolean
+    node: Window | Element,
+    event: string,
+    fn: EventListenerOrEventListenerObject,
+    opt?: AddEventListenerOptions | boolean
 ): void {
   node && node.addEventListener(event, fn, opt || false)
 }
 
-/**
- * @param node
- * @param event
- * @param fn
- * @param opt
- */
-
 export function removeListener(
-  node: Window | Element,
-  event: string,
-  fn: EventListenerOrEventListenerObject,
-  opt?: AddEventListenerOptions | boolean
+    node: Window | Element,
+    event: string,
+    fn: EventListenerOrEventListenerObject,
+    opt?: AddEventListenerOptions | boolean
 ): void {
   node && node.removeEventListener(event, fn, opt || false)
 }
-
-/**
- * @param event
- * @param prevent
- */
 
 export function preventEvent(event: Event, prevent?: boolean): void {
   event.stopPropagation()
