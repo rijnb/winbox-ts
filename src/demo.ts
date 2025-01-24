@@ -1,28 +1,25 @@
 import WinBox from "./winBox"
 
-(function() {
-
-  let winbox: any;
-
-  (window as any).examples = {
-
-    "basic": function() {
+;(function () {
+  let winbox: any
+  ;(window as any).examples = {
+    basic: function () {
       new WinBox({title: "Basic Window"})
     },
-    "root": function() {
+    root: function () {
       new WinBox({
         title: "Custom Root",
 
         root: document.querySelector("main") ?? undefined
       })
     },
-    "border": function() {
+    border: function () {
       new WinBox({
         title: "Custom Border",
         border: 5
       })
     },
-    "color": function() {
+    color: function () {
       new WinBox({
         title: "Custom Color",
         background: "#ff005d",
@@ -30,7 +27,7 @@ import WinBox from "./winBox"
       })
     },
 
-    "icon": function() {
+    icon: function () {
       new WinBox({
         title: "Custom Icon",
         icon: "demo/wikipedia.svg",
@@ -38,7 +35,7 @@ import WinBox from "./winBox"
       })
     },
 
-    "viewport": function() {
+    viewport: function () {
       new WinBox({
         title: "Limit Viewport",
         top: 50,
@@ -47,7 +44,7 @@ import WinBox from "./winBox"
         left: 50
       })
     },
-    "splitscreen": function() {
+    splitscreen: function () {
       new WinBox({
         title: "Splitscreen (Left)",
         right: 300,
@@ -59,7 +56,7 @@ import WinBox from "./winBox"
         max: true
       })
     },
-    "position": function() {
+    position: function () {
       new WinBox({
         title: "Custom Position / Size",
         x: 400,
@@ -68,38 +65,38 @@ import WinBox from "./winBox"
         height: 200
       })
     },
-    "modal": function() {
+    modal: function () {
       new WinBox({
         title: "Modal Window",
         modal: true
       })
     },
-    "innerhtml": function() {
+    innerhtml: function () {
       new WinBox({
         title: "Set innerHTML",
         html: "<h1>Lorem Ipsum</h1>"
       })
     },
-    "mount-clone": function() {
+    "mount-clone": function () {
       new WinBox({
         title: "Mount DOM",
         mount: document.getElementById("content")?.cloneNode(true) as HTMLElement
       })
     },
-    "mount-auto": function() {
+    "mount-auto": function () {
       new WinBox({
         title: "Mount DOM",
         mount: document.getElementById("content") ?? undefined
       })
     },
-    "iframe": function() {
+    iframe: function () {
       new WinBox({
         title: "WinBox.js",
         url: "https://nextapps-de.github.io/winbox/",
         class: "iframe"
       })
     },
-    "all-options": function() {
+    "all-options": function () {
       new WinBox({
         // configuration:
         index: 1,
@@ -145,48 +142,45 @@ import WinBox from "./winBox"
         html: "width: 250, height: 200",
 
         // callbacks:
-        oncreate: function(options: any) {
+        oncreate: function (options: any) {
           options.icon = "demo/wikipedia.svg"
         },
-        onshow: function() {
+        onshow: function () {
           console.log("Show:", this.id)
         },
-        onhide: function() {
+        onhide: function () {
           console.log("Hide:", this.id)
         },
-        onfocus: function() {
-          (this as any as WinBox).setBackground("#fff")
+        onfocus: function () {
+          ;(this as any as WinBox).setBackground("#fff")
         },
-        onblur: function() {
-          (this as any as WinBox).setBackground("#999")
+        onblur: function () {
+          ;(this as any as WinBox).setBackground("#999")
         },
-        onresize: function(w: number, h: number) {
-          (this as any as WinBox).body.textContent =
-            `width: ${w}, height: ${h}`
+        onresize: function (w: number, h: number) {
+          ;(this as any as WinBox).body.textContent = `width: ${w}, height: ${h}`
         },
-        onmove: function(x: number, y: number) {
-          (this as any as WinBox).body.textContent =
-            `x: ${x}, y: ${y}`
+        onmove: function (x: number, y: number) {
+          ;(this as any as WinBox).body.textContent = `x: ${x}, y: ${y}`
         },
-        onclose: function(force?: boolean) {
+        onclose: function (force?: boolean) {
           return !confirm("Close window?")
         },
-        onfullscreen: function() {
+        onfullscreen: function () {
           console.log("Fullscreen:", this.id)
         },
-        onmaximize: function() {
+        onmaximize: function () {
           console.log("Maximize:", this.id)
         },
-        onminimize: function() {
+        onminimize: function () {
           console.log("Minimize:", this.id)
         },
-        onrestore: function() {
+        onrestore: function () {
           console.log("Restore:", this.id)
         }
       })
     },
-    "custom-css": function() {
-
+    "custom-css": function () {
       new WinBox({
         title: "Custom CSS",
         width: 350,
@@ -195,16 +189,14 @@ import WinBox from "./winBox"
         mount: document.getElementById("content")?.cloneNode(true) as HTMLElement
       })
     },
-    "custom-class": function() {
-
+    "custom-class": function () {
       new WinBox({
         title: "Custom CSS (Class)",
         class: "my-theme",
         mount: document.getElementById("content")?.cloneNode(true) as HTMLElement
       })
     },
-    "custom-control": function() {
-
+    "custom-control": function () {
       const winbox = new WinBox({title: "Custom Controls", class: "no-full", background: "#313646"})
       winbox.removeControl("wb-max").removeControl("wb-min")
       winbox.addControl({
@@ -215,16 +207,15 @@ import WinBox from "./winBox"
         // icon url when not specified via classname
         image: "demo/heart.svg",
         // click listener
-        click: function(event: Event, winbox: any) {
+        click: function (event: Event, winbox: any) {
           // the winbox instance will be passed as 2nd parameter
-          console.log(winbox.id);
+          console.log(winbox.id)
           // "this" refers to the button which was clicked:
-          (this as HTMLElement).classList.toggle("active")
+          ;(this as HTMLElement).classList.toggle("active")
         }
       })
     },
-    "custom-template": function() {
-
+    "custom-template": function () {
       const template = document.createElement("div")
       template.innerHTML = `
                     <div class=wb-header>
@@ -241,70 +232,71 @@ import WinBox from "./winBox"
 
       new WinBox({title: "Custom Template", template, background: "#313646"})
     },
-    "theme-modern": function() {
-
+    "theme-modern": function () {
       new WinBox({
         title: "Theme: Modern",
         class: "modern",
         mount: document.getElementById("content")?.cloneNode(true) as HTMLElement
       })
     },
-    "controls": function() {
-
+    controls: function () {
       winbox = new WinBox({
         title: "Controls",
         mount: document.getElementById("controls") as HTMLElement,
         border: 4,
-        onclose: function(force?: boolean) {
+        onclose: function (force?: boolean) {
           return !force && !confirm("Close window?")
         }
       })
     }
-  };
-
-  (window as any).buttons = {
-    minimize: function() {
+  }
+  ;(window as any).buttons = {
+    minimize: function () {
       winbox.minimize(!winbox.min)
     },
-    maximize: function() {
+    maximize: function () {
       winbox.maximize(!winbox.max)
     },
-    fullscreen: function() {
+    fullscreen: function () {
       winbox.fullscreen(!winbox.full)
     },
-    center: function() {
+    center: function () {
       winbox.move("center", "center")
     },
-    move: function() {
+    move: function () {
       winbox.move("right", "bottom")
     },
-    resize: function() {
+    resize: function () {
       winbox.resize("50%", "50%")
     },
-    title: function() {
+    title: function () {
       winbox.setTitle("Title-" + Math.random())
     },
-    color: function() {
+    color: function () {
       winbox.setBackground(
-        "rgb(" + (Math.random() * 255 | 0) + "," +
-        (Math.random() * 255 | 0) + "," +
-        (Math.random() * 255 | 0) + ")"
+        "rgb(" +
+          ((Math.random() * 255) | 0) +
+          "," +
+          ((Math.random() * 255) | 0) +
+          "," +
+          ((Math.random() * 255) | 0) +
+          ")"
       )
     },
-    modal: function() {
+    modal: function () {
       winbox.toggleClass("modal")
     },
-    add: function() {
+    add: function () {
       winbox.addClass("my-theme")
     },
-    remove: function() {
+    remove: function () {
       winbox.removeClass("my-theme")
     },
-    close: function() {
+    close: function () {
       winbox.close()
     },
-    force_close: function() {
+    force_close: function () {
       winbox.close(true)
     }
   }
-}())
+})()

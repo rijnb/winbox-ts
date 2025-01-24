@@ -1,17 +1,17 @@
 export function addListener(
-    node: Window | Element,
-    event: string,
-    fn: EventListenerOrEventListenerObject,
-    opt?: AddEventListenerOptions | boolean
+  node: Window | Element,
+  event: string,
+  fn: EventListenerOrEventListenerObject,
+  opt?: AddEventListenerOptions | boolean
 ): void {
   node && node.addEventListener(event, fn, opt || false)
 }
 
 export function removeListener(
-    node: Window | Element,
-    event: string,
-    fn: EventListenerOrEventListenerObject,
-    opt?: AddEventListenerOptions | boolean
+  node: Window | Element,
+  event: string,
+  fn: EventListenerOrEventListenerObject,
+  opt?: AddEventListenerOptions | boolean
 ): void {
   node && node.removeEventListener(event, fn, opt || false)
 }

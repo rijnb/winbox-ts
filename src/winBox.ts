@@ -100,7 +100,7 @@ export class WinBox {
   top: number = 0
   right: number = 0
   bottom: number = 0
-  left: |number = 0
+  left: number = 0
   overflow: boolean = false
   min: boolean = false
   max: boolean = false
@@ -376,7 +376,7 @@ export class WinBox {
     if (node && node.tagName.toLowerCase() === "iframe") {
       node.src = url
     } else {
-      this.body.innerHTML = "<iframe src=\"" + url + "\"></iframe>"
+      this.body.innerHTML = '<iframe src="' + url + '"></iframe>'
       if (onload) (this.body.firstChild as HTMLIFrameElement).onload = onload
     }
     return this
@@ -553,7 +553,7 @@ export class WinBox {
     }
 
     if (!is_fullscreen || !cancel_fullscreen()) {
-      (this.body[prefix_request] as any)()
+      ;(this.body[prefix_request] as any)()
       is_fullscreen = this
       this.full = true
       this.onfullscreen && this.onfullscreen()
@@ -615,7 +615,7 @@ export class WinBox {
     if (classname) if (classname) node.className = classname
     if (image) setStyle(node, "background-image", "url(" + image + ")")
     if (click)
-      node.onclick = function(event) {
+      node.onclick = function (event) {
         click.call(this, event, self)
       }
 
@@ -672,16 +672,16 @@ function setup() {
   body = document.body
 
   body[(prefix_request = "requestFullscreen")] ||
-  (body as any)[prefix_request = "msRequestFullscreen" as keyof HTMLElement] ||
-  (body as any)[prefix_request = "webkitRequestFullscreen" as keyof HTMLElement] ||
-  (body as any)[prefix_request = "mozRequestFullscreen" as keyof HTMLElement] ||
-  (prefix_request = "" as keyof HTMLElement)
+    (body as any)[(prefix_request = "msRequestFullscreen" as keyof HTMLElement)] ||
+    (body as any)[(prefix_request = "webkitRequestFullscreen" as keyof HTMLElement)] ||
+    (body as any)[(prefix_request = "mozRequestFullscreen" as keyof HTMLElement)] ||
+    (prefix_request = "" as keyof HTMLElement)
 
   prefix_exit =
     prefix_request &&
     prefix_request.replace("request", "exit").replace("mozRequest", "mozCancel").replace("Request", "Exit")
 
-  addListener(window, "resize", function() {
+  addListener(window, "resize", function () {
     init()
     update_min_stack()
   })
@@ -689,13 +689,13 @@ function setup() {
   addListener(
     body,
     "mousedown",
-    function(event) {
+    function (event) {
       window_clicked = false
     },
     true
   )
 
-  addListener(body, "mousedown", function(event) {
+  addListener(body, "mousedown", function (event) {
     if (!window_clicked) {
       const stack_length = stack_win.length
       if (stack_length) {
@@ -724,18 +724,18 @@ function register(self: WinBox) {
   addWindowListener(self, "se")
   addWindowListener(self, "sw")
 
-  addListener(getByClass(self.dom, "wb-min")!, "click", function(event) {
+  addListener(getByClass(self.dom, "wb-min")!, "click", function (event) {
     preventEvent(event)
     self.min ? self.restore().focus() : self.minimize()
   })
 
-  addListener(getByClass(self.dom, "wb-max")!, "click", function(event) {
+  addListener(getByClass(self.dom, "wb-max")!, "click", function (event) {
     preventEvent(event)
     self.max ? self.restore().focus() : self.maximize().focus()
   })
 
   if (prefix_request) {
-    addListener(getByClass(self.dom, "wb-full")!, "click", function(event) {
+    addListener(getByClass(self.dom, "wb-full")!, "click", function (event) {
       preventEvent(event)
       self.fullscreen().focus()
     })
@@ -743,7 +743,7 @@ function register(self: WinBox) {
     self.addClass("no-full")
   }
 
-  addListener(getByClass(self.dom, "wb-close")!, "click", function(event) {
+  addListener(getByClass(self.dom, "wb-close")!, "click", function (event) {
     preventEvent(event)
     self.close()
   })
@@ -751,7 +751,7 @@ function register(self: WinBox) {
   addListener(
     self.dom,
     "mousedown",
-    function(event) {
+    function (event) {
       window_clicked = true
     },
     true
@@ -760,7 +760,7 @@ function register(self: WinBox) {
   addListener(
     self.body,
     "mousedown",
-    function(event) {
+    function (event) {
       self.focus()
     },
     true
@@ -1026,7 +1026,8 @@ function cancel_fullscreen(): boolean {
 
 function has_fullscreen(): boolean {
   return (
-    !!document.fullscreen || !!document.fullscreenElement ||
+    !!document.fullscreen ||
+    !!document.fullscreenElement ||
     !!(document as any).webkitFullscreenElement ||
     !!(document as any).mozFullScreenElement
   )
