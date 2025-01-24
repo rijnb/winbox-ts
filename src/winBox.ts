@@ -840,7 +840,7 @@ function addWindowListener(self: WinBox, dir: string) {
     }
   }
 
-  function mousedown(event: MouseEvent | TouchEvent|Touch) {
+  function mousedown(event: MouseEvent | TouchEvent | Touch) {
     preventEvent(event as Event, true)
     self.focus()
 
@@ -877,7 +877,7 @@ function addWindowListener(self: WinBox, dir: string) {
       }
 
       x = !(event instanceof TouchEvent) ? event.pageX : 0
-      y = !(event instanceof TouchEvent) ?event.pageY : 0
+      y = !(event instanceof TouchEvent) ? event.pageY : 0
     }
   }
 
@@ -888,8 +888,8 @@ function addWindowListener(self: WinBox, dir: string) {
       event instanceof TouchEvent && (event = event.touches[0])
     }
 
-    const pageX = !(event instanceof TouchEvent) ?event.pageX : 0
-    const pageY = !(event instanceof TouchEvent) ?event.pageY : 0
+    const pageX = !(event instanceof TouchEvent) ? event.pageX : 0
+    const pageY = !(event instanceof TouchEvent) ? event.pageY : 0
     const offsetX = pageX - x
     const offsetY = pageY - y
 
