@@ -1,11 +1,15 @@
-## v0.2.7
+## 0.9.0
+
+- Initial TypeScript version of library. Created by Rijn Buve. 
+
+## 0.2.7
 
 - support option "overflow" to allow the window moving outside the viewports border
 - add static function `WinBox.stack()` which returns an Array containing every window instance ordered by focus history
 - support drag move from maximized state
 - automatically focus previous focused window on minimize window
 
-## v0.2.5
+## 0.2.5
 
 - support custom toolbar icon
 - support custom toolbar controls

@@ -1,7 +1,7 @@
 {
   "name": "winbox-ts",
-  "version": "0.2.82",
-  "description": "Modern HTML5/TypeScript window manager for the web.",
+  "version": "0.9.0",
+  "description": "Modern HTML5 window manager for the web (TypeScript version).",
   "homepage": "https://github.com/rijnb/winbox-ts",
   "bugs": {
     "url": "https://github.com/rijnb/winbox-ts/issues",
@@ -31,17 +31,9 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "base64-img": "^1.0.4",
     "copy-webpack-plugin": "^12.0.2",
-    "cpx": "^1.5.0",
-    "csso": "^5.0.5",
-    "csso-cli": "^4.0.2",
-    "google-closure-compiler": "^20240317.0.0",
     "html-webpack-plugin": "^5.6.3",
     "jest": "^29.7.0",
-    "less": "^4.2.2",
-    "less-plugin-autoprefix": "^2.0.0",
-    "less-plugin-clean-css": "^1.6.0",
     "npm-run-all": "^4.1.5",
     "open-cli": "^8.0.0",
     "postcss": "^8.5.1",
@@ -53,7 +45,6 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
-    "web-servo": "^0.5.1",
     "webpack": "5.94.0",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
@@ -62,7 +53,7 @@
     "clean-webpack-plugin": "^4.0.0"
   },
   "keywords": [],
-  "author": "Thomas Wilkerling (TypeScript version: Rijn Buve)",
-  "copyright": "Nextapps GmbH",
+  "author": "Rijn Buve",
+  "copyright": "Rijn Buve",
   "license": "Apache-2.0"
 }

@@ -1,3 +1,9 @@
+```
+Note: This TyepScript version of WinBox was created by Rijn Buve, 2025. 
+It is based on version 0.2.82 of the JavaScript version of WinBox created
+by Thomas Wilkerling.
+``` 
+
 <h1>
     <img src="https://cdn.jsdelivr.net/gh/nextapps-de/winbox@master/demo/winbox-gradient.svg" alt="WinBox.js: A modern HTML5 window manager for the web." width="100%">
 </h1>
