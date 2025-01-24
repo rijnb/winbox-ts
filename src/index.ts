@@ -165,42 +165,42 @@ import WinBox from "./winBox"
         html: "width: 250, height: 200",
 
         // callbacks:
-        oncreate: (options: any) => {
+        oncreate: function (options: any) {
           options.icon = "demo/wikipedia.svg"
         },
-        onshow: () => {
+        onshow: function () {
           console.log("Show:", this.id)
         },
-        onhide: () => {
+        onhide: function () {
           console.log("Hide:", this.id)
         },
-        onfocus: () => {
-          this.setBackground("#fff")
+        onfocus: function () {
+          (this as any as WinBox).setBackground("#fff")
         },
-        onblur: () => {
-          this.setBackground("#999")
+        onblur: function () {
+          (this as any as WinBox).setBackground("#999")
         },
-        onresize: (w: number, h: number) => {
-          this.body.textContent =
+        onresize: function (w: number, h: number) {
+          (this as any as WinBox).body.textContent =
               `width: ${w}, height: ${h}`
         },
-        onmove: (x: number, y: number) => {
-          this.body.textContent =
+        onmove: function (x: number, y: number) {
+          (this as any as WinBox).body.textContent =
               `x: ${x}, y: ${y}`
         },
-        onclose: (force?: boolean) => {
+        onclose: function (force?: boolean) {
           return !confirm("Close window?")
         },
-        onfullscreen: () => {
+        onfullscreen: function () {
           console.log("Fullscreen:", this.id)
         },
-        onmaximize: () => {
+        onmaximize: function () {
           console.log("Maximize:", this.id)
         },
-        onminimize: () => {
+        onminimize: function () {
           console.log("Minimize:", this.id)
         },
-        onrestore: () => {
+        onrestore: function () {
           console.log("Restore:", this.id)
         }
       })

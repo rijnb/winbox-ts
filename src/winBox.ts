@@ -553,8 +553,7 @@ class WinBox {
     }
 
     if (!is_fullscreen || !cancel_fullscreen()) {
-      const fn = this.body[prefix_request] as () => void
-      fn?.()
+      (this.body[prefix_request] as any)()
       is_fullscreen = this
       this.full = true
       this.onfullscreen && this.onfullscreen()
@@ -672,13 +671,11 @@ function parse(num: number | string, base: number, center = 0): number {
 function setup() {
   body = document.body
 
-  body[(prefix_request = "requestFullscreen")]
-  // !!
-  // ||
-  // body[prefix_request = "msRequestFullscreen"] ||
-  // body[prefix_request = "webkitRequestFullscreen"] ||
-  // body[prefix_request = "mozRequestFullscreen"] ||
-  // (prefix_request = "");
+  body[(prefix_request = "requestFullscreen")] ||
+  (body as any)[prefix_request = "msRequestFullscreen" as keyof HTMLElement] ||
+  (body as any)[prefix_request = "webkitRequestFullscreen" as keyof HTMLElement] ||
+  (body as any)[prefix_request = "mozRequestFullscreen" as keyof HTMLElement] ||
+  (prefix_request = "" as keyof HTMLElement)
 
   prefix_exit =
       prefix_request &&
@@ -689,15 +686,14 @@ function setup() {
     update_min_stack()
   })
 
-  // !! TODO: Remove
-  // addListener(
-  //     body,
-  //     "mousedown",
-  //     function (event) {
-  //       window_clicked = false
-  //     },
-  //     true
-  // )
+  addListener(
+      body,
+      "mousedown",
+      function (event) {
+        window_clicked = false
+      },
+      true
+  )
 
   addListener(body, "mousedown", function (event) {
     if (!window_clicked) {
@@ -712,7 +708,6 @@ function setup() {
         }
       }
     }
-    window_clicked = false
   })
 
   init()
@@ -1031,11 +1026,9 @@ function cancel_fullscreen(): boolean {
 
 function has_fullscreen(): boolean {
   return (
-      !!document.fullscreen || !!document.fullscreenElement
-      // !!
-      // ||
-      // !!document.webkitFullscreenElement ||
-      // !!document.mozFullScreenElement
+      !!document.fullscreen || !!document.fullscreenElement ||
+      !!(document as any).webkitFullscreenElement ||
+      !!(document as any).mozFullScreenElement
   )
 }
 
